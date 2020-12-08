@@ -27,6 +27,7 @@ The car provider adds their cars that need to be return with their corresponding
 
 **Important to do**
 * Add an available car
+* Delete your available cars
 * Accept a request
 
 
@@ -41,5 +42,6 @@ As soon as a car is requested, it should be hided from the available cars.
 * The available cars and their info
 
 **Important to do**
+* Create an account for yourself and be able to log into it
 * Request a car
 * Filter cars by their location and destination
