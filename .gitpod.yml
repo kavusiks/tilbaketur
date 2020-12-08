@@ -1,6 +1,9 @@
+tasks:
+  - init: sdk use java 14.0.2.j9-adpt 
+    command: cd jobblett
 image:
   file: .gitpod.Dockerfile
 
-tasks:
-  - init: 'echo "TODO: Replace with init/build command"'
-    command: 'echo "TODO: Replace with command to start project"'
+ports:
+  # used by virtual desktop and vnc, supports JavaFX
+  - port: 6080
