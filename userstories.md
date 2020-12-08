@@ -14,7 +14,7 @@ The car provider adds their cars that need to be return with their corresponding
 * Price: free or the minial driving costs
 
 **Important to do**
-*  Create an account for you company and log into it
+*  Create an account for you company and be able log into it
 *  Add your available cars 
 *  Delete your available cars
 
@@ -30,5 +30,6 @@ As soon as a car is requested, it should be hided from the available cars.
 * The available cars and their info
 
 **Important to do**
+* Create an account for yourself and be able to log into it
 * Request a car
 * Filter cars by their location and destination
