@@ -1,8 +1,7 @@
 **Userstories**
-Her har vi alle brukerhistorier som danner utgangspunktet for hvordan vil skal utvikle appen. Det gir oss et konkret
-bilde av hva vi skal utvikle.
+All of the userstories that creates the basement for our app will be listed here. This will give us some specific points to start to develop on.
 
-<h3>Add a an available ca (us-1)</h3>
+<h3>Add a an available car (us-1)</h3>
 
 As a car rental company I wish to add all of our available cars so they can be returned. 
 
