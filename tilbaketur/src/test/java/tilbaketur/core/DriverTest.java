@@ -1,7 +1,6 @@
 package tilbaketur.core;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -24,7 +23,7 @@ public class DriverTest {
     }
 
     @Test
-    public void testGetCars(){
+    public void getCarsTest(){
         assertEquals(0,testDriver.getCars().size());
     }
 }

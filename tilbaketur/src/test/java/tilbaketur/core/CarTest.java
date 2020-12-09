@@ -13,13 +13,16 @@ public class CarTest {
     static Driver driver1;
     static Driver driver2;
     static Car car1;
-    Car car2;
+    static Provider provider1;
+
 
     @BeforeAll
     public static void setUp() {
         driver1 = new Driver("driver1", "Driver1", "Driver One");
         driver2 = new Driver("driver2", "Driver2", "Driver Two");
-        car1 = new Car("B", 5, "Free");
+        provider1 = new Provider("provider1", "Provider123", "CarRentals");
+        car1 = new Car(provider1 ,"B", 5, "Free");
+        
     }
 
     @Test
