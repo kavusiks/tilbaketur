@@ -29,13 +29,27 @@ public abstract class AbstractUser
         return username;
     }
 
-    protected void setPassword(String currentPassword, String newPassword) {
-        if(this.password==currentPassword) this.password = newPassword;
+    public void setPassword(String currentPassword, String newPassword) throws IllegalArgumentException{
+        if(this.password.equals(currentPassword)){
+            this.password = newPassword;
+        }
+        else throw new IllegalArgumentException("Wrong currentPassword");
     }
 
     public List<Car> getCars() {
         return cars;
     }
+    
+    //TODO: should not be used
+    public String getPassword() {
+        return password;
+    }
 
     public abstract void addCars(Car car);
+
+    @Deprecated
+    @Override
+    public String toString() {
+        return name + " " + username + " " + password + " " + cars.toString();
+    }
 }

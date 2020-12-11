@@ -17,6 +17,7 @@ public class Car {
         this.carClass = carClass;
         this.seats = seats;
         this.price = price;
+        //provider.addCars(this);
     }
 
     public Car (Provider provider, String carClass, int seats, String price, Driver driver) {
@@ -24,6 +25,7 @@ public class Car {
         this.carClass = carClass;
         this.seats = seats;
         this.price = price;
+        //provider.addCars(this);
 
         this.driver=driver;
     }
@@ -38,6 +40,27 @@ public class Car {
 
     public Provider getProvider() {
         return provider;
+    }
+
+    public int getSeats() {
+        return seats;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public String getCarClass() {
+        return carClass;
+    }
+
+    @Deprecated
+    @Override
+    public String toString() {
+        String rider;
+        if(driver==null)rider="null";
+        else rider=driver.toString();
+        return provider.toString() + carClass + seats+ price+ rider.toString();
     }
 
 
