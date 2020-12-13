@@ -25,13 +25,23 @@ public class UserListDeserializer extends JsonDeserializer<UserList> {
             UserList userList = new UserList();
             JsonNode usersNode = objectNode.get("userList");
             if (usersNode instanceof ArrayNode) {
+                String deserializeNextAs="null";
                 for (JsonNode elementNode : ((ArrayNode) usersNode)) {
-                    if(elementNode.has("Driver:")){
+                    if(elementNode.asText().equals("Driver:")) {
+                        deserializeNextAs="driver";
+                        continue;
+                    }
+                    if(elementNode.asText().equals("Provider:")) {
+                        deserializeNextAs="provider";
+                        continue;
+                    }
+
+                    if(deserializeNextAs.equals("driver")) {
                         Driver driver = new DriverDeserializer().deserialize(elementNode);
                         if (driver != null) userList.addItem(driver);
                     }
 
-                    if(elementNode.has("Provider:")){
+                    if(deserializeNextAs.equals("provider")) {
                         Provider provider = new ProviderDeserializer().deserialize(elementNode);
                         if (provider != null) userList.addItem(provider);
                     }

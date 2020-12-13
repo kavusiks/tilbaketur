@@ -3,38 +3,35 @@ package tilbaketur.json;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.JsonMappingException;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import tilbaketur.core.Driver;
-import tilbaketur.core.Provider;
 import tilbaketur.core.UserList;
 
+public class UserListPersistenceTest extends AbstractPersistenceTest {
 
-public class UserListPersistenceTest {
-        static ObjectMapper mapper;
+    
+    static UserList userList1;
+    String userList1CorrectFormat = "{\"userList\":[\"Driver:\",{\"name\":\"Driver One\",\"username\":\"driver1\",\"password\":\"Driver1\",\"requestedCar\":null},\"Driver:\",{\"name\":\"Driver Two\",\"username\":\"driver2\",\"password\":\"Driver2\",\"requestedCar\":null},\"Provider:\",{\"name\":\"CarRentals\",\"username\":\"provider1\",\"password\":\"Provider123\"}]}";
 
     @BeforeAll
     public static void setUp() {
-        mapper = new ObjectMapper();
-        mapper.registerModule(new TilbaketurModule());
+        userList1 = new UserList();
+        userList1.addItem(driver1);
+        userList1.addItem(driver2);
+        userList1.addItem(provider1);
     }
 
-    
     @Test
     public void userListSerializerTest() throws JsonProcessingException {
-        Driver driver1 = new Driver("driver1", "Driver1", "Driver One");
-        Driver driver2 = new Driver("driver2", "Driver2", "Driver Two");
-        Provider provider1 = new Provider("provider1", "Provider123", "CarRentals");
-        UserList userList = new UserList();
-        userList.addItem(driver1);
-        userList.addItem(driver2);
-        userList.addItem(provider1);
+        assertEquals(userList1CorrectFormat, mapper.writeValueAsString(userList1));
+    }
 
-        String userListCorrectFormat = "{\"userList\":[\"Driver:\",{\"name\":\"Driver One\",\"username\":\"driver1\",\"password\":\"Driver1\",\"requestedCar\":null},\"Driver:\",{\"name\":\"Driver Two\",\"username\":\"driver2\",\"password\":\"Driver2\",\"requestedCar\":null},\"Provider:\",{\"name\":\"CarRentals\",\"username\":\"provider1\",\"password\":\"Provider123\"}]}";
-        assertEquals(userListCorrectFormat, mapper.writeValueAsString(userList));
-
+    @Test
+    public void userListDeserializerTest() throws JsonMappingException, JsonProcessingException {
+        UserList userList2 = mapper.readValue(userList1CorrectFormat, UserList.class);
+        checkTwoUserLists(userList1, userList2);
     }
 }
