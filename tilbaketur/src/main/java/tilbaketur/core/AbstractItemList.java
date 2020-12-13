@@ -2,32 +2,40 @@ package tilbaketur.core;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 
 /**
  * UserList
  */
-public abstract class AbstractItemList<Object> {
+public abstract class AbstractItemList<T> {
 
-    private Collection<Object> items;
+    private Collection<T> items;
 
     public AbstractItemList() {
-        items = new ArrayList<Object>();
+        items = new ArrayList<T>();
     }
 
-    public AbstractItemList(Collection<Object> items) {
+    public AbstractItemList(Collection<T> items) {
         this.items = items;
     }
 
-    public void addItem (Object item) {
+    public void addItem(T item) {
         items.add(item);
     }
 
-    public void deleteItem(Object item) {
+    public void deleteItem(T item) {
         items.remove(item);
     }
 
-    public Collection<Object> getItemsList() {
+    @Deprecated
+    public Collection<T> getItemsList() {
         return items;
     }
+
+    public Iterator<T> getIterator() {
+        return items.iterator();
+    }
+
+
 
 }
