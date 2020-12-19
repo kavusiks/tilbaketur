@@ -84,8 +84,6 @@
                     <mainClass>tilbaketur.ui.TilbaketurApp</mainClass>
                 </configuration>
             </plugin>
-
-
         </plugins>
     </build>
 </project>

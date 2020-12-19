@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="489.0" prefWidth="279.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tilbaketur.ui.UserHomeController">
+   <children>
+      <Button fx:id="availableCarsBtn" layoutX="79.0" layoutY="260.0" mnemonicParsing="false" onAction="#goToAvailableCars" text="View available cars" />
+      <Button fx:id="logOutBtn" layoutX="20.0" layoutY="436.0" mnemonicParsing="false" onAction="#goToLogin" prefHeight="27.0" prefWidth="65.0" text="Log out" />
+      <Label fx:id="welcomeLabel" layoutX="15.0" layoutY="62.0" prefHeight="45.0" prefWidth="262.0" text="Welcome">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Label>
+      <Label fx:id="currentRequestLabel" layoutX="14.0" layoutY="124.0" prefHeight="17.0" prefWidth="158.0" text="Your current requests:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+   </children>
+</Pane>

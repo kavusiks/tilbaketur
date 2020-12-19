@@ -18,5 +18,6 @@ public class UserList extends AbstractItemList<AbstractUser> implements Iterable
         // TODO Vurder behovet for denne metoden
         return (Iterator<AbstractUser>) this.getItemsList();
     }
-    
+
+
 }
