@@ -1,15 +1,12 @@
 package tilbaketur.ui;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import javafx.fxml.FXML;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import tilbaketur.core.AbstractUser;
-import tilbaketur.core.CarList;
-import tilbaketur.core.UserList;
+
 
 import java.io.IOException;
 

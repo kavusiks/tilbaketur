@@ -98,6 +98,11 @@ public abstract class AbstractController {
       return this.allUsers;
     }
 
+    protected void removeUser(AbstractUser user) {
+        this.allUsers.getItemsList().remove(user);
+        exportJson();
+    }
+
     protected CarList getAllCars() {
       return this.allCars;
     }
