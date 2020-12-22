@@ -19,10 +19,9 @@ public class DriverPersistenceTest extends AbstractPersistenceTest{
     }
 
     @Test
-    void driverDeserializerTest() throws JsonMappingException, JsonProcessingException {
+    public void driverDeserializerTest() throws JsonMappingException, JsonProcessingException {
         Driver driver2 = mapper.readValue(driver1CorrectFormat, Driver.class);
         checkTwoDrivers(driver1, driver2);
-        //assertTrue(driver1.equals(driver2));
     }
 
 }

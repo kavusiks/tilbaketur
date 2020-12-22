@@ -36,6 +36,7 @@ public abstract class AbstractItemList<T> {
         return items.iterator();
     }
 
-
-
+    @Override public String toString() {
+        return "AbstractItemList{" + "items=" + items.toString() + '}';
+    }
 }
