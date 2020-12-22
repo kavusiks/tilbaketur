@@ -1,46 +1,33 @@
 package tilbaketur.json;
 
-import java.io.IOException;
-
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
-
+import java.io.IOException;
 import tilbaketur.core.Driver;
 
 public class DriverSerializer extends JsonSerializer<Driver> {
 
-   
+  /*
+   * format: { "name": "...", "username": "...", "password": "...", "cars":[...],
+   * "requestedCar": "..." }
+   */
+
+  @Override
+  public void serialize(Driver driver, JsonGenerator jsonGen,
+      SerializerProvider serializerProvider) throws IOException {
+    jsonGen.writeStartObject();
+    jsonGen.writeStringField("name", driver.getName());
+    jsonGen.writeStringField("username", driver.getUsername());
+    jsonGen.writeStringField("password", driver.getPassword());
     /*
-     * format:
-     * { 
-     * "name": "...",
-     * "username": "...",
-     * "password": "...",
-     * "cars":[...],
-     * "requestedCar": "..."
-     * }
+     * jGen.writeArrayFieldStart("cars"); driver.getCars().forEach(car -> { try {
+     * jGen.writeObject(car); } catch (IOException e) { e.printStackTrace(); } });
+     * jGen.writeEndArray();
      */
+    jsonGen.writeObjectField("requestedCar", driver.getRequestedCar());
+    jsonGen.writeEndObject();
 
-    @Override
-    public void serialize(Driver driver, JsonGenerator jGen, SerializerProvider serializerProvider) throws IOException {
-        jGen.writeStartObject();
-        jGen.writeStringField("name", driver.getName());
-        jGen.writeStringField("username", driver.getUsername());
-        jGen.writeStringField("password", driver.getPassword());
-        /*jGen.writeArrayFieldStart("cars");
-        driver.getCars().forEach(car -> {
-            try {
-                jGen.writeObject(car);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
-        jGen.writeEndArray();*/
-        jGen.writeObjectField("requestedCar", driver.getRequestedCar());
-        jGen.writeEndObject();
-
-    }
-
+  }
 
 }
