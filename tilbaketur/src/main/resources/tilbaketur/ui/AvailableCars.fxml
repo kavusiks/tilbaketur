@@ -4,6 +4,7 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.control.Button?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="489.0" prefWidth="279.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tilbaketur.ui.AvailableCarsController">
    <children>
@@ -13,5 +14,6 @@
             <Font size="26.0" />
          </font>
       </Label>
+      <Button fx:id="goBackBtn" layoutX="23.0" layoutY="437.0" mnemonicParsing="false" onAction="#goToUserHome" text="Back" />
    </children>
 </Pane>

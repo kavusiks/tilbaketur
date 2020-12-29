@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.node.TextNode;
 import java.io.IOException;
+import tilbaketur.core.Car;
 import tilbaketur.core.Driver;
 
 public class DriverDeserializer extends JsonDeserializer<Driver> {
@@ -32,6 +33,7 @@ public class DriverDeserializer extends JsonDeserializer<Driver> {
       String username = "";
       String password = "";
       String name = "";
+      Car requestedCar = null;
       JsonNode usernameNode = objectNode.get("username");
       if (usernameNode instanceof TextNode) {
         username = ((TextNode) usernameNode).asText();
@@ -44,8 +46,16 @@ public class DriverDeserializer extends JsonDeserializer<Driver> {
       if (nameNode instanceof TextNode) {
         name = ((TextNode) nameNode).asText();
       }
+      JsonNode requestedCarNode = objectNode.get("requestedCar");
+      if (requestedCarNode instanceof ObjectNode) {
+        requestedCar = new CarDeserializer().deserialize(requestedCarNode);
+      }
       if (!(username.equals("") && name.equals("") && password.equals(""))) {
-        return new Driver(username, password, name);
+        Driver driver = new Driver(username, password, name);
+        if (requestedCarNode != null) {
+          driver.requestCar(requestedCar);
+        }
+        return driver;
       }
     }
     return null;

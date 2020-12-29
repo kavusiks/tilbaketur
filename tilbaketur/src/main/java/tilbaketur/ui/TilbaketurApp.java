@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 
 public class TilbaketurApp extends Application {
   // todo: kan ikke være static, finn en måte å bytte scene på
-  public static Stage stage;
+  public Stage stage;
 
   @Override
   public void start(Stage stage) throws Exception {

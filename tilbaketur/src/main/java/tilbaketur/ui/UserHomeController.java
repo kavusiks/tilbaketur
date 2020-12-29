@@ -36,8 +36,15 @@ public class UserHomeController extends AbstractController {
     switchScene("AvailableCars.fxml", availableCarsBtn);
   }
 
+  /**
+   * Sets loggedInAs null, before logging in.
+   *
+   * @throws IOException I/O exception when switching scene.
+   */
   @FXML
   public void goToLogin() throws IOException {
+    loggedInAs = null;
+    exportJson();
     switchScene("Login.fxml", logOutBtn);
   }
 }

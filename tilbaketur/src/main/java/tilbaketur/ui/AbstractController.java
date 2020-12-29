@@ -20,6 +20,8 @@ import javafx.stage.Stage;
 import tilbaketur.core.AbstractUser;
 import tilbaketur.core.Car;
 import tilbaketur.core.CarList;
+import tilbaketur.core.Driver;
+import tilbaketur.core.Provider;
 import tilbaketur.core.UserList;
 import tilbaketur.json.CarListSerializer;
 import tilbaketur.json.TilbaketurModule;
@@ -30,26 +32,29 @@ public abstract class AbstractController {
   protected UserList allUsers = new UserList();
   protected CarList allCars = new CarList();
   protected ObjectMapper mapper;
-  static AbstractUser loggedInAs;
+  protected AbstractUser loggedInAs;
   protected URL userListUrl;
   protected URL carListUrl;
   protected Reader readerCarList;
   protected Reader readerUserList;
+  protected Reader readerLoggedInAs;
   protected String userListFileLocation;
   protected String carListFileLocation;
+  protected String loggedInAsFileLocation;
 
   /**
-   * Used to first create a folder on users computer. 
+   * Used to first create a folder on users computer.
    * Then loads the default values to the app.
-   * Then saves the default values and 
+   * Then saves the default values and
    * any added values to the created folder.
    *
    * @throws IOException when the mapper can't read the each readers.
-   * 
+   *
    */
   public AbstractController() throws IOException {
     userListFileLocation = System.getProperty("user.home") + "/.tilbaketur/" + "userList.json";
     carListFileLocation = System.getProperty("user.home") + "/.tilbaketur/" + "carList.json";
+    loggedInAsFileLocation = System.getProperty("user.home") + "/.tilbaketur/" + "loggedInAs.json";
     userListUrl = UserListSerializer.class.getResource("defaultUserList.json");
     carListUrl = CarListSerializer.class.getResource("defaultCarList.json");
     mapper = new ObjectMapper();
@@ -57,6 +62,35 @@ public abstract class AbstractController {
     importJson();
     allUsers = mapper.readValue(readerUserList, UserList.class);
     allCars = mapper.readValue(readerCarList, CarList.class);
+    Driver loggedInDriver = null;
+    Provider loggedInProvider = null;
+    try {
+      System.out.println("Try Driver");
+      loggedInDriver = mapper.readValue(readerLoggedInAs, Driver.class);
+      System.out.println("Driver succeed");
+    } catch (NullPointerException e) {
+      //TODO: handle exception
+      System.out.println("Driver failed");
+    }
+    /*try {
+      System.out.println("Try Provider");
+      loggedInProvider = mapper.readValue(readerLoggedInAs, Provider.class);
+      System.out.println("Provider succeed");
+    } catch (Exception e) {
+      //TODO: handle exception
+      System.out.println("Provider failed");
+    }*/
+    //loggedInDriver = mapper.readValue(readerLoggedInAs, Driver.class);
+    //loggedInProvider = mapper.readValue(readerLoggedInAs, Provider.class);
+    if (loggedInDriver != null) {
+      loggedInAs = loggedInDriver;
+      System.out.println("Logged in as Driver");
+    }
+    /*if (loggedInProvider != null) {
+      loggedInAs = loggedInProvider;
+      System.out.println("Logged in as Provider");
+    }*/
+
   }
 
   @FXML
@@ -72,12 +106,15 @@ public abstract class AbstractController {
       useDefaultValues();
     } else {
       try {
-        Path pathUserList = Paths.get(System.getProperty("user.home") 
+        Path pathUserList = Paths.get(System.getProperty("user.home")
             + "/.tilbaketur", "userList.json");
         readerUserList = new FileReader(pathUserList.toFile(), StandardCharsets.UTF_8);
-        Path pathCarList = Paths.get(System.getProperty("user.home") 
+        Path pathCarList = Paths.get(System.getProperty("user.home")
             + "/.tilbaketur", "carList.json");
         readerCarList = new FileReader(pathCarList.toFile(), StandardCharsets.UTF_8);
+        Path pathLoggedInAs = Paths.get(System.getProperty("user.home")
+            + "/.tilbaketur", "loggedInAs.json");
+        readerLoggedInAs = new FileReader(pathLoggedInAs.toFile(), StandardCharsets.UTF_8);
       } catch (IOException e) {
         System.out.println(e.getMessage());
         useDefaultValues();
@@ -96,6 +133,7 @@ public abstract class AbstractController {
       mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
       mapper.writeValue(new File(userListFileLocation), getAllUsers());
       mapper.writeValue(new File(carListFileLocation), getAllCars());
+      mapper.writeValue(new File(loggedInAsFileLocation), loggedInAs);
 
     } catch (Exception ex) {
       ex.printStackTrace();
@@ -131,7 +169,8 @@ public abstract class AbstractController {
    */
   public void switchScene(String source, Node button) throws IOException {
     Stage stage = (Stage) button.getScene().getWindow();
-    Parent root = FXMLLoader.load(getClass().getResource(source));
+    //Parent root = FXMLLoader.load(getClass().getResource(source));
+    Parent root = FXMLLoader.load(AbstractController.class.getResource(source));
     Scene scene = new Scene(root);
     stage.setScene(scene);
     stage.show();

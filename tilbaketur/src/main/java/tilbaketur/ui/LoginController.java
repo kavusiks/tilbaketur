@@ -24,8 +24,15 @@ public class LoginController extends AbstractController {
   @FXML
   Label errorMessage;
 
+  /**
+   * Makes sure that no one are logged in when the app stars.
+   *
+   * @throws IOException I/O exceptions while exporting.
+   */
   public LoginController() throws IOException {
     super();
+    loggedInAs = null;
+    exportJson();
   }
 
   @Override
@@ -49,6 +56,7 @@ public class LoginController extends AbstractController {
     if (currentUser != null) {
       if (currentUser.getPassword().equals(password)) {
         loggedInAs = currentUser;
+        exportJson();
         switchScene("UserHome.fxml", loginBtn);
       }
     } else {
