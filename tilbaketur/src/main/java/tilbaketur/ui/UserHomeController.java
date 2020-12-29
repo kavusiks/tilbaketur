@@ -1,34 +1,34 @@
 package tilbaketur.ui;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
+import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import tilbaketur.core.Driver;
 
-import java.io.IOException;
-
-public class UserHomeController extends AbstractController{
+public class UserHomeController extends AbstractController {
   @FXML
   Button availableCarsBtn;
 
-  @FXML Button logOutBtn;
+  @FXML
+  Button logOutBtn;
 
-  @FXML Label currentRequestLabel;
-  @FXML Label welcomeLabel;
+  @FXML
+  Label currentRequestLabel;
+  @FXML
+  Label welcomeLabel;
 
   public UserHomeController() throws IOException {
     super();
   }
 
-
-
-  @Override public void initialize() {
-    welcomeLabel.setText("Welcome "+ loggedInAs.getName());
-    /*if(loggedInAs instanceof Driver) {
-      currentRequestLabel.setText(((Driver) loggedInAs).getRequestedCar().toString());
-    }
-    else currentRequestLabel.setText("");*/
+  @Override
+  public void initialize() {
+    welcomeLabel.setText("Welcome " + loggedInAs.getName());
+    /*
+     * if(loggedInAs instanceof Driver) { currentRequestLabel.setText(((Driver)
+     * loggedInAs).getRequestedCar().toString()); } else
+     * currentRequestLabel.setText("");
+     */
   }
 
   @FXML
@@ -36,8 +36,15 @@ public class UserHomeController extends AbstractController{
     switchScene("AvailableCars.fxml", availableCarsBtn);
   }
 
+  /**
+   * Sets loggedInAs null, before logging in.
+   *
+   * @throws IOException I/O exception when switching scene.
+   */
   @FXML
   public void goToLogin() throws IOException {
+    loggedInAs = null;
+    exportJson();
     switchScene("Login.fxml", logOutBtn);
   }
 }
