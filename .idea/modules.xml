@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/tilbaketur/core/core.iml" filepath="$PROJECT_DIR$/tilbaketur/core/core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/tilbaketur/fxui/fxui.iml" filepath="$PROJECT_DIR$/tilbaketur/fxui/fxui.iml" />
+      <module fileurl="file://$PROJECT_DIR$/tilbaketur/json/json.iml" filepath="$PROJECT_DIR$/tilbaketur/json/json.iml" />
+      <module fileurl="file://$PROJECT_DIR$/tilbaketur/tilbaketur.iml" filepath="$PROJECT_DIR$/tilbaketur/tilbaketur.iml" />
+    </modules>
+  </component>
+</project>
