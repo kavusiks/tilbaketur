@@ -55,8 +55,10 @@ public abstract class AbstractController {
     userListFileLocation = System.getProperty("user.home") + "/.tilbaketur/" + "userList.json";
     carListFileLocation = System.getProperty("user.home") + "/.tilbaketur/" + "carList.json";
     loggedInAsFileLocation = System.getProperty("user.home") + "/.tilbaketur/" + "loggedInAs.json";
-    userListUrl = UserListSerializer.class.getResource("defaultUserList.json");
-    carListUrl = CarListSerializer.class.getResource("defaultCarList.json");
+    userListUrl = TilbaketurApp.class.getResource("defaultUserList.json");
+    carListUrl = TilbaketurApp.class.getResource("defaultCarList.json");
+    //userListUrl = UserListSerializer.class.getResource("defaultUserList.json");
+    //carListUrl = CarListSerializer.class.getResource("defaultCarList.json");
     mapper = new ObjectMapper();
     mapper.registerModule(new TilbaketurModule());
     importJson();
@@ -68,7 +70,7 @@ public abstract class AbstractController {
       System.out.println("Try Driver");
       loggedInDriver = mapper.readValue(readerLoggedInAs, Driver.class);
       System.out.println("Driver succeed");
-    } catch (NullPointerException e) {
+    } catch (RuntimeException e) {
       //TODO: handle exception
       System.out.println("Driver failed");
     }
@@ -106,6 +108,7 @@ public abstract class AbstractController {
       useDefaultValues();
     } else {
       try {
+        System.out.println("prøver å sjekke save");
         Path pathUserList = Paths.get(System.getProperty("user.home")
             + "/.tilbaketur", "userList.json");
         readerUserList = new FileReader(pathUserList.toFile(), StandardCharsets.UTF_8);
