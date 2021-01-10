@@ -9,7 +9,7 @@ import tilbaketur.core.Driver;
 import tilbaketur.core.Provider;
 import tilbaketur.core.UserList;
 
-public class UserListSerializer extends JsonSerializer<UserList> {
+class UserListSerializer extends JsonSerializer<UserList> {
 
   /*
    * format: {"users": [...]}

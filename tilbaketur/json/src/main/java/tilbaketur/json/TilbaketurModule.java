@@ -8,7 +8,7 @@ import tilbaketur.core.Driver;
 import tilbaketur.core.Provider;
 import tilbaketur.core.UserList;
 
-public class TilbaketurModule extends SimpleModule {
+class TilbaketurModule extends SimpleModule {
 
   private static final long serialVersionUID = 1L;
   private static final String NAME = "TilbaketurModule";

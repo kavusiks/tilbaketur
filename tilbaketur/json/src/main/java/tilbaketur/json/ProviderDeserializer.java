@@ -12,7 +12,7 @@ import com.fasterxml.jackson.databind.node.TextNode;
 import java.io.IOException;
 import tilbaketur.core.Provider;
 
-public class ProviderDeserializer extends JsonDeserializer<Provider> {
+class ProviderDeserializer extends JsonDeserializer<Provider> {
 
   @Override
   public Provider deserialize(JsonParser parser, DeserializationContext ctxt)

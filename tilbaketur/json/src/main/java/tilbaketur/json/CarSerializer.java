@@ -7,7 +7,7 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 import java.io.IOException;
 import tilbaketur.core.Car;
 
-public class CarSerializer extends JsonSerializer<Car> {
+class CarSerializer extends JsonSerializer<Car> {
 
   /*
    * format: { "provider": "...", "carClass": "...", "seats": "...", "price":

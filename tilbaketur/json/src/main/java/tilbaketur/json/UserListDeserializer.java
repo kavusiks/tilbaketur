@@ -13,7 +13,7 @@ import tilbaketur.core.Driver;
 import tilbaketur.core.Provider;
 import tilbaketur.core.UserList;
 
-public class UserListDeserializer extends JsonDeserializer<UserList> {
+class UserListDeserializer extends JsonDeserializer<UserList> {
   @Override
   public UserList deserialize(JsonParser parser, DeserializationContext ctxt)
       throws IOException, JsonProcessingException {
