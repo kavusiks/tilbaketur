@@ -12,7 +12,7 @@ import java.io.IOException;
 import tilbaketur.core.Car;
 import tilbaketur.core.Driver;
 
-public class DriverDeserializer extends JsonDeserializer<Driver> {
+class DriverDeserializer extends JsonDeserializer<Driver> {
   @Override
   public Driver deserialize(JsonParser parser, DeserializationContext ctxt)
       throws IOException, JsonProcessingException {

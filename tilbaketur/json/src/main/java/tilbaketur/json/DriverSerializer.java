@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 import java.io.IOException;
 import tilbaketur.core.Driver;
 
-public class DriverSerializer extends JsonSerializer<Driver> {
+class DriverSerializer extends JsonSerializer<Driver> {
 
   /*
    * format: { "name": "...", "username": "...", "password": "...", "cars":[...],

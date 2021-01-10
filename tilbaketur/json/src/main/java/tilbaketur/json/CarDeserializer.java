@@ -14,7 +14,7 @@ import tilbaketur.core.Car;
 import tilbaketur.core.Driver;
 import tilbaketur.core.Provider;
 
-public class CarDeserializer extends JsonDeserializer<Car> {
+class CarDeserializer extends JsonDeserializer<Car> {
 
   @Override
   public Car deserialize(JsonParser parser,

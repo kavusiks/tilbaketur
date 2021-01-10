@@ -15,15 +15,14 @@
     </properties>
 
     <dependencies>
-        <!-- JSON Jackson -->
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>2.11.2</version>
-        </dependency>
         <dependency>
             <groupId>PersonligProsjekt.tilbaketur</groupId>
             <artifactId>core</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>PersonligProsjekt.tilbaketur</groupId>
+            <artifactId>json</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <!-- Test with JUnit5 -->
@@ -53,12 +52,6 @@
             <groupId>org.testfx</groupId>
             <artifactId>testfx-junit5</artifactId>
         </dependency>
-        <dependency>
-            <groupId>PersonligProsjekt.tilbaketur</groupId>
-            <artifactId>json</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-
     </dependencies>
 
 

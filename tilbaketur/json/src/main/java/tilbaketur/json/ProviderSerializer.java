@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 import java.io.IOException;
 import tilbaketur.core.Provider;
 
-public class ProviderSerializer extends JsonSerializer<Provider> {
+class ProviderSerializer extends JsonSerializer<Provider> {
 
   /*
    * format: { "name": "...", "username": "...", "password": "...", "cars":[...] }

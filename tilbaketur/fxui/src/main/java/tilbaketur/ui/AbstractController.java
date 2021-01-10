@@ -1,7 +1,5 @@
 package tilbaketur.ui;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -23,15 +21,13 @@ import tilbaketur.core.CarList;
 import tilbaketur.core.Driver;
 import tilbaketur.core.Provider;
 import tilbaketur.core.UserList;
-import tilbaketur.json.CarListSerializer;
-import tilbaketur.json.TilbaketurModule;
-import tilbaketur.json.UserListSerializer;
+import tilbaketur.json.TilbaketurPersistence;
 
 public abstract class AbstractController {
 
   protected UserList allUsers = new UserList();
   protected CarList allCars = new CarList();
-  protected ObjectMapper mapper;
+  protected TilbaketurPersistence persistence;
   protected AbstractUser loggedInAs;
   protected URL userListUrl;
   protected URL carListUrl;
@@ -59,16 +55,15 @@ public abstract class AbstractController {
     carListUrl = TilbaketurApp.class.getResource("defaultCarList.json");
     //userListUrl = UserListSerializer.class.getResource("defaultUserList.json");
     //carListUrl = CarListSerializer.class.getResource("defaultCarList.json");
-    mapper = new ObjectMapper();
-    mapper.registerModule(new TilbaketurModule());
+    persistence = new TilbaketurPersistence();
     importJson();
-    allUsers = mapper.readValue(readerUserList, UserList.class);
-    allCars = mapper.readValue(readerCarList, CarList.class);
+    allUsers = persistence.readUserList(readerUserList);
+    allCars = persistence.readCarList(readerCarList);
     Driver loggedInDriver = null;
     Provider loggedInProvider = null;
     try {
       System.out.println("Try Driver");
-      loggedInDriver = mapper.readValue(readerLoggedInAs, Driver.class);
+      loggedInDriver = persistence.readDriver(readerLoggedInAs);
       System.out.println("Driver succeed");
     } catch (RuntimeException e) {
       //TODO: handle exception
@@ -133,10 +128,14 @@ public abstract class AbstractController {
 
   protected void exportJson() {
     try {
-      mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
-      mapper.writeValue(new File(userListFileLocation), getAllUsers());
-      mapper.writeValue(new File(carListFileLocation), getAllCars());
-      mapper.writeValue(new File(loggedInAsFileLocation), loggedInAs);
+      persistence.configureBeforeWrite();
+      //mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
+      persistence.writeUserList(userListFileLocation, getAllUsers());
+      //mapper.writeValue(new File(userListFileLocation), getAllUsers());
+      persistence.writeCarList(carListFileLocation, getAllCars());
+      //mapper.writeValue(new File(carListFileLocation), getAllCars());
+      persistence.writeDriver(loggedInAsFileLocation, ((Driver) loggedInAs));
+      //mapper.writeValue(new File(loggedInAsFileLocation), loggedInAs);
 
     } catch (Exception ex) {
       ex.printStackTrace();
