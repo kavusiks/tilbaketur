@@ -55,7 +55,7 @@ public class CreateAccountController extends AbstractController {
   }
 
   public void addUser(AbstractUser user) throws IOException {
-    allUsers.addItem(user);
+    workSpace.addUser(user);
     exportJson();
   }
 
@@ -95,7 +95,8 @@ public class CreateAccountController extends AbstractController {
     String username = usernameField.getText();
     String password = passwordField.getText();
 
-    if (allUsers.getItemsList().stream().anyMatch(user -> user.getUsername().matches(username))) {
+    if (workSpace.getUserList().getItemsList().stream()
+        .anyMatch(user -> user.getUsername().matches(username))) {
       errorMessageLabel.setText("Username already exists");
       return;
     }
@@ -111,7 +112,7 @@ public class CreateAccountController extends AbstractController {
       Provider provider = new Provider(username, password, name);
       addUser(provider);
     }
-    System.out.println(allUsers.toString());
+    System.out.println(workSpace.getUserList().toString());
     switchScene("Login.fxml", createAccountBtn);
 
   }

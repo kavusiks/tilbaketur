@@ -166,6 +166,9 @@
         <module>core</module>
         <module>fxui</module>
         <module>json</module>
+        <module>integrationtests</module>
+        <module>restapi</module>
+        <module>restserver</module>
     </modules>
 
 </project>

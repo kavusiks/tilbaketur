@@ -21,14 +21,16 @@ import tilbaketur.core.CarList;
 import tilbaketur.core.Driver;
 import tilbaketur.core.Provider;
 import tilbaketur.core.UserList;
+import tilbaketur.core.WorkSpace;
 import tilbaketur.json.TilbaketurPersistence;
 
 public abstract class AbstractController {
 
-  protected UserList allUsers = new UserList();
-  protected CarList allCars = new CarList();
+  //protected UserList allUsers = new UserList();
+  //protected CarList allCars = new CarList();
+  protected WorkSpace workSpace = new WorkSpace();
   protected TilbaketurPersistence persistence;
-  protected AbstractUser loggedInAs;
+  //protected AbstractUser loggedInAs;
   protected URL userListUrl;
   protected URL carListUrl;
   protected Reader readerCarList;
@@ -57,10 +59,13 @@ public abstract class AbstractController {
     //carListUrl = CarListSerializer.class.getResource("defaultCarList.json");
     persistence = new TilbaketurPersistence();
     importJson();
-    allUsers = persistence.readUserList(readerUserList);
-    allCars = persistence.readCarList(readerCarList);
+    //allUsers = persistence.readUserList(readerUserList);
+    workSpace.setUserList(persistence.readUserList(readerUserList));
+    //allCars = persistence.readCarList(readerCarList);
+    workSpace.setCarList(persistence.readCarList(readerCarList));
     Driver loggedInDriver = null;
     Provider loggedInProvider = null;
+    //bytt dette til å sjekke om bruker finnes i userlist, og sette logged inn utifra det.
     try {
       System.out.println("Try Driver");
       loggedInDriver = persistence.readDriver(readerLoggedInAs);
@@ -80,7 +85,8 @@ public abstract class AbstractController {
     //loggedInDriver = mapper.readValue(readerLoggedInAs, Driver.class);
     //loggedInProvider = mapper.readValue(readerLoggedInAs, Provider.class);
     if (loggedInDriver != null) {
-      loggedInAs = loggedInDriver;
+      //loggedInAs = loggedInDriver;
+      workSpace.setLoggedInAs(loggedInDriver);
       System.out.println("Logged in as Driver");
     }
     /*if (loggedInProvider != null) {
@@ -134,7 +140,7 @@ public abstract class AbstractController {
       //mapper.writeValue(new File(userListFileLocation), getAllUsers());
       persistence.writeCarList(carListFileLocation, getAllCars());
       //mapper.writeValue(new File(carListFileLocation), getAllCars());
-      persistence.writeDriver(loggedInAsFileLocation, ((Driver) loggedInAs));
+      persistence.writeDriver(loggedInAsFileLocation, ((Driver) workSpace.getLoggedInAs()));
       //mapper.writeValue(new File(loggedInAsFileLocation), loggedInAs);
 
     } catch (Exception ex) {
@@ -144,21 +150,22 @@ public abstract class AbstractController {
 
   // skal legges i kontrolleren som bruker denne koden
   protected void addCar(Car car) {
-    allCars.addItem(car);
+    //allCars.addItem(car);
+    workSpace.addCar(car);
     exportJson();
   }
 
   protected UserList getAllUsers() {
-    return this.allUsers;
+    return workSpace.getUserList();
   }
 
   protected void removeUser(AbstractUser user) {
-    this.allUsers.getItemsList().remove(user);
+    workSpace.removeUser(user);
     exportJson();
   }
 
   protected CarList getAllCars() {
-    return this.allCars;
+    return workSpace.getCarList();
   }
 
   /**

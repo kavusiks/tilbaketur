@@ -19,7 +19,8 @@ public class AvailableCarsController extends AbstractController {
 
   @Override
   public void initialize() {
-    allCars.getItemsList().stream().forEach(car -> availableCarsListView.getItems().add(car));
+    workSpace.getCarList().getItemsList().stream()
+        .forEach(car -> availableCarsListView.getItems().add(car));
   }
 
   @FXML

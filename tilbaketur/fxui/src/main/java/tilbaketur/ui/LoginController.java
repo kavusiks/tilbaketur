@@ -31,7 +31,7 @@ public class LoginController extends AbstractController {
    */
   public LoginController() throws IOException {
     super();
-    loggedInAs = null;
+    workSpace.setLoggedInAs(null);
     exportJson();
   }
 
@@ -50,12 +50,12 @@ public class LoginController extends AbstractController {
   public void login() throws IOException {
     String username = usernameField.getText();
     String password = passwordField.getText();
-    AbstractUser currentUser = allUsers.getItemsList().stream()
+    AbstractUser currentUser = workSpace.getUserList().getItemsList().stream()
         .filter(user -> user.getUsername().equals(username))
         .findFirst().orElse(null);
     if (currentUser != null) {
       if (currentUser.getPassword().equals(password)) {
-        loggedInAs = currentUser;
+        workSpace.setLoggedInAs(currentUser);
         exportJson();
         switchScene("UserHome.fxml", loginBtn);
       }

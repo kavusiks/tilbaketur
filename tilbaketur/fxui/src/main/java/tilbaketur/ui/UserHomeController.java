@@ -23,7 +23,7 @@ public class UserHomeController extends AbstractController {
 
   @Override
   public void initialize() {
-    welcomeLabel.setText("Welcome " + loggedInAs.getName());
+    welcomeLabel.setText("Welcome " + workSpace.getLoggedInAs().getName());
     /*
      * if(loggedInAs instanceof Driver) { currentRequestLabel.setText(((Driver)
      * loggedInAs).getRequestedCar().toString()); } else
@@ -43,7 +43,7 @@ public class UserHomeController extends AbstractController {
    */
   @FXML
   public void goToLogin() throws IOException {
-    loggedInAs = null;
+    workSpace.setLoggedInAs(null);
     exportJson();
     switchScene("Login.fxml", logOutBtn);
   }

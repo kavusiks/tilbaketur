@@ -4,7 +4,10 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/tilbaketur/core/core.iml" filepath="$PROJECT_DIR$/tilbaketur/core/core.iml" />
       <module fileurl="file://$PROJECT_DIR$/tilbaketur/fxui/fxui.iml" filepath="$PROJECT_DIR$/tilbaketur/fxui/fxui.iml" />
+      <module fileurl="file://$PROJECT_DIR$/tilbaketur/integrationtests/integrationtests.iml" filepath="$PROJECT_DIR$/tilbaketur/integrationtests/integrationtests.iml" />
       <module fileurl="file://$PROJECT_DIR$/tilbaketur/json/json.iml" filepath="$PROJECT_DIR$/tilbaketur/json/json.iml" />
+      <module fileurl="file://$PROJECT_DIR$/tilbaketur/restapi/restapi.iml" filepath="$PROJECT_DIR$/tilbaketur/restapi/restapi.iml" />
+      <module fileurl="file://$PROJECT_DIR$/tilbaketur/restserver/restserver.iml" filepath="$PROJECT_DIR$/tilbaketur/restserver/restserver.iml" />
       <module fileurl="file://$PROJECT_DIR$/tilbaketur/tilbaketur.iml" filepath="$PROJECT_DIR$/tilbaketur/tilbaketur.iml" />
     </modules>
   </component>
