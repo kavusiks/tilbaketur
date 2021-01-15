@@ -18,10 +18,15 @@ class UserListDeserializer extends JsonDeserializer<UserList> {
   public UserList deserialize(JsonParser parser, DeserializationContext ctxt)
       throws IOException, JsonProcessingException {
     TreeNode treeNode = parser.getCodec().readTree(parser);
+    return deserialize((JsonNode) treeNode);
+  }
+
+  public UserList deserialize(JsonNode treeNode) {
+
     if (treeNode instanceof ObjectNode) {
       ObjectNode objectNode = (ObjectNode) treeNode;
       UserList userList = new UserList();
-      JsonNode usersNode = objectNode.get("userList");
+      JsonNode usersNode = objectNode.get("users");
       if (usersNode instanceof ArrayNode) {
         String deserializeNextAs = "null";
         for (JsonNode elementNode : ((ArrayNode) usersNode)) {
@@ -54,3 +59,5 @@ class UserListDeserializer extends JsonDeserializer<UserList> {
     return null;
   }
 }
+
+

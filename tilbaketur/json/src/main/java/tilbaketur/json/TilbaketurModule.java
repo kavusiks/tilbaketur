@@ -7,6 +7,7 @@ import tilbaketur.core.CarList;
 import tilbaketur.core.Driver;
 import tilbaketur.core.Provider;
 import tilbaketur.core.UserList;
+import tilbaketur.core.WorkSpace;
 
 class TilbaketurModule extends SimpleModule {
 
@@ -25,12 +26,14 @@ class TilbaketurModule extends SimpleModule {
     addSerializer(Driver.class, new DriverSerializer());
     addSerializer(Provider.class, new ProviderSerializer());
     addSerializer(UserList.class, new UserListSerializer());
+    addSerializer(WorkSpace.class, new WorkSpaceSerializer());
 
     addDeserializer(Car.class, new CarDeserializer());
     addDeserializer(CarList.class, new CarListDeserializer());
     addDeserializer(Driver.class, new DriverDeserializer());
     addDeserializer(Provider.class, new ProviderDeserializer());
     addDeserializer(UserList.class, new UserListDeserializer());
+    addDeserializer(WorkSpace.class, new WorkSpaceDeserializer());
 
   }
 

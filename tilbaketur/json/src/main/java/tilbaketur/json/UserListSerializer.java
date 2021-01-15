@@ -19,7 +19,7 @@ class UserListSerializer extends JsonSerializer<UserList> {
   public void serialize(UserList userList, JsonGenerator jsonGen, 
       SerializerProvider serializerProvider) throws IOException {
     jsonGen.writeStartObject();
-    jsonGen.writeArrayFieldStart("userList");
+    jsonGen.writeArrayFieldStart("users");
     userList.getItemsList().forEach(user -> {
       try {
         if (user instanceof Driver) {

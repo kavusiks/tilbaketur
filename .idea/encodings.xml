@@ -4,7 +4,13 @@
     <file url="file://$PROJECT_DIR$/tilbaketur/core/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tilbaketur/fxui/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tilbaketur/fxui/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tilbaketur/integrationtests/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tilbaketur/integrationtests/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tilbaketur/json/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tilbaketur/json/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tilbaketur/restapi/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tilbaketur/restapi/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tilbaketur/restserver/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tilbaketur/restserver/src/main/resources" charset="UTF-8" />
   </component>
 </project>

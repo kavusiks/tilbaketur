@@ -1,1 +1,0 @@
-{"cars":[{"provider":{"name":"CarRentals","username":"provider1","password":"Provider123"},"carClass":"B","seats":5,"price":"Free","driver":null},{"provider":{"name":"CarRentals","username":"provider1","password":"Provider123"},"carClass":"B","seats":5,"price":"Fuel cost","driver":{"name":"Driver One","username":"driver1","password":"Driver1","requestedCar":null}}]}

@@ -11,12 +11,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.junit.jupiter.api.BeforeAll;
 
-import tilbaketur.core.AbstractUser;
-import tilbaketur.core.Car;
-import tilbaketur.core.CarList;
-import tilbaketur.core.Driver;
-import tilbaketur.core.Provider;
-import tilbaketur.core.UserList;
+import tilbaketur.core.*;
 
 public abstract class AbstractPersistenceTest {
 
@@ -121,6 +116,29 @@ public abstract class AbstractPersistenceTest {
         for(int i=0; i<carList1Cars.size(); i++) {
             checkTwoCars(carList1Cars.get(i), carList2Cars.get(i));
         }
+
+    }
+    protected void checkTwoWorkSpaces(WorkSpace ws1, WorkSpace ws2) {
+        String ifFailed = "Not the same workspaces";
+        checkTwoUserLists(ws1.getUserList(), ws2.getUserList());
+        checkTwoCarLists(ws1.getCarList(), ws2.getCarList());
+        AbstractUser loggedInWs1 = ws1.getLoggedInAs();
+        AbstractUser loggedInWs2 = ws2.getLoggedInAs();
+        if (ws1.getLoggedInAs() instanceof Provider) {
+            if (ws2.getLoggedInAs() instanceof Driver) {
+                fail("Not the same logged in users!");
+            } else {
+                checkTwoProviders((Provider) ws1.getLoggedInAs(), (Provider) ws2.getLoggedInAs());
+            }
+        }
+        if (ws1.getLoggedInAs() instanceof Driver) {
+            if (ws2.getLoggedInAs() instanceof Provider) {
+                fail("Not the same logged in users!");
+            } else {
+                checkTwoDrivers((Driver) ws1.getLoggedInAs(), (Driver) ws2.getLoggedInAs());
+            }
+        }
+
     }
     
 

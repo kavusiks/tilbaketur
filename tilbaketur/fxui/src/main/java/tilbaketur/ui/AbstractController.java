@@ -26,19 +26,11 @@ import tilbaketur.json.TilbaketurPersistence;
 
 public abstract class AbstractController {
 
-  //protected UserList allUsers = new UserList();
-  //protected CarList allCars = new CarList();
-  protected WorkSpace workSpace = new WorkSpace();
+  protected WorkSpace workSpace;
   protected TilbaketurPersistence persistence;
-  //protected AbstractUser loggedInAs;
-  protected URL userListUrl;
-  protected URL carListUrl;
-  protected Reader readerCarList;
-  protected Reader readerUserList;
-  protected Reader readerLoggedInAs;
-  protected String userListFileLocation;
-  protected String carListFileLocation;
-  protected String loggedInAsFileLocation;
+  protected URL workSpaceUrl;
+  protected Reader readerWorkSpace;
+  protected String workSpaceFileLocation;
 
   /**
    * Used to first create a folder on users computer.
@@ -50,50 +42,11 @@ public abstract class AbstractController {
    *
    */
   public AbstractController() throws IOException {
-    userListFileLocation = System.getProperty("user.home") + "/.tilbaketur/" + "userList.json";
-    carListFileLocation = System.getProperty("user.home") + "/.tilbaketur/" + "carList.json";
-    loggedInAsFileLocation = System.getProperty("user.home") + "/.tilbaketur/" + "loggedInAs.json";
-    userListUrl = TilbaketurApp.class.getResource("defaultUserList.json");
-    carListUrl = TilbaketurApp.class.getResource("defaultCarList.json");
-    //userListUrl = UserListSerializer.class.getResource("defaultUserList.json");
-    //carListUrl = CarListSerializer.class.getResource("defaultCarList.json");
+    workSpaceFileLocation = System.getProperty("user.home") + "/.tilbaketur/" + "workSpace.json";
+    workSpaceUrl = TilbaketurApp.class.getResource("defaultWorkSpace.json");
     persistence = new TilbaketurPersistence();
     importJson();
-    //allUsers = persistence.readUserList(readerUserList);
-    workSpace.setUserList(persistence.readUserList(readerUserList));
-    //allCars = persistence.readCarList(readerCarList);
-    workSpace.setCarList(persistence.readCarList(readerCarList));
-    Driver loggedInDriver = null;
-    Provider loggedInProvider = null;
-    //bytt dette til å sjekke om bruker finnes i userlist, og sette logged inn utifra det.
-    try {
-      System.out.println("Try Driver");
-      loggedInDriver = persistence.readDriver(readerLoggedInAs);
-      System.out.println("Driver succeed");
-    } catch (RuntimeException e) {
-      //TODO: handle exception
-      System.out.println("Driver failed");
-    }
-    /*try {
-      System.out.println("Try Provider");
-      loggedInProvider = mapper.readValue(readerLoggedInAs, Provider.class);
-      System.out.println("Provider succeed");
-    } catch (Exception e) {
-      //TODO: handle exception
-      System.out.println("Provider failed");
-    }*/
-    //loggedInDriver = mapper.readValue(readerLoggedInAs, Driver.class);
-    //loggedInProvider = mapper.readValue(readerLoggedInAs, Provider.class);
-    if (loggedInDriver != null) {
-      //loggedInAs = loggedInDriver;
-      workSpace.setLoggedInAs(loggedInDriver);
-      System.out.println("Logged in as Driver");
-    }
-    /*if (loggedInProvider != null) {
-      loggedInAs = loggedInProvider;
-      System.out.println("Logged in as Provider");
-    }*/
-
+    workSpace = persistence.readWorkSpace(readerWorkSpace);
   }
 
   @FXML
@@ -109,16 +62,9 @@ public abstract class AbstractController {
       useDefaultValues();
     } else {
       try {
-        System.out.println("prøver å sjekke save");
-        Path pathUserList = Paths.get(System.getProperty("user.home")
-            + "/.tilbaketur", "userList.json");
-        readerUserList = new FileReader(pathUserList.toFile(), StandardCharsets.UTF_8);
-        Path pathCarList = Paths.get(System.getProperty("user.home")
-            + "/.tilbaketur", "carList.json");
-        readerCarList = new FileReader(pathCarList.toFile(), StandardCharsets.UTF_8);
-        Path pathLoggedInAs = Paths.get(System.getProperty("user.home")
-            + "/.tilbaketur", "loggedInAs.json");
-        readerLoggedInAs = new FileReader(pathLoggedInAs.toFile(), StandardCharsets.UTF_8);
+        Path pathWorkSpace = Paths.get(System.getProperty("user.home")
+            + "/.tilbaketur", "workSpace.json");
+        readerWorkSpace = new FileReader(pathWorkSpace.toFile(), StandardCharsets.UTF_8);
       } catch (IOException e) {
         System.out.println(e.getMessage());
         useDefaultValues();
@@ -128,20 +74,13 @@ public abstract class AbstractController {
   }
 
   protected void useDefaultValues() throws IOException {
-    readerUserList = new InputStreamReader(userListUrl.openStream(), StandardCharsets.UTF_8);
-    readerCarList = new InputStreamReader(carListUrl.openStream(), StandardCharsets.UTF_8);
+    readerWorkSpace = new InputStreamReader(workSpaceUrl.openStream(), StandardCharsets.UTF_8);
   }
 
   protected void exportJson() {
     try {
       persistence.configureBeforeWrite();
-      //mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
-      persistence.writeUserList(userListFileLocation, getAllUsers());
-      //mapper.writeValue(new File(userListFileLocation), getAllUsers());
-      persistence.writeCarList(carListFileLocation, getAllCars());
-      //mapper.writeValue(new File(carListFileLocation), getAllCars());
-      persistence.writeDriver(loggedInAsFileLocation, ((Driver) workSpace.getLoggedInAs()));
-      //mapper.writeValue(new File(loggedInAsFileLocation), loggedInAs);
+      persistence.writeWorkSpace(workSpaceFileLocation, getWorkSpace());
 
     } catch (Exception ex) {
       ex.printStackTrace();
@@ -150,11 +89,11 @@ public abstract class AbstractController {
 
   // skal legges i kontrolleren som bruker denne koden
   protected void addCar(Car car) {
-    //allCars.addItem(car);
     workSpace.addCar(car);
     exportJson();
   }
 
+  // skal legges i kontrolleren som bruker denne koden
   protected UserList getAllUsers() {
     return workSpace.getUserList();
   }
@@ -164,8 +103,13 @@ public abstract class AbstractController {
     exportJson();
   }
 
+  // skal legges i kontrolleren som bruker denne koden
   protected CarList getAllCars() {
     return workSpace.getCarList();
+  }
+
+  protected WorkSpace getWorkSpace() {
+    return this.workSpace;
   }
 
   /**

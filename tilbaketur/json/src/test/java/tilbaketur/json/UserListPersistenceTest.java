@@ -14,7 +14,7 @@ public class UserListPersistenceTest extends AbstractPersistenceTest {
 
     
     static UserList userList1;
-    String userList1CorrectFormat = "{\"userList\":[\"Driver:\",{\"name\":\"Driver One\",\"username\":\"driver1\",\"password\":\"Driver1\",\"requestedCar\":null},\"Driver:\",{\"name\":\"Driver Two\",\"username\":\"driver2\",\"password\":\"Driver2\",\"requestedCar\":null},\"Provider:\",{\"name\":\"CarRentals\",\"username\":\"provider1\",\"password\":\"Provider123\"}]}";
+    String userList1CorrectFormat = "{\"users\":[\"Driver:\",{\"name\":\"Driver One\",\"username\":\"driver1\",\"password\":\"Driver1\",\"requestedCar\":null},\"Driver:\",{\"name\":\"Driver Two\",\"username\":\"driver2\",\"password\":\"Driver2\",\"requestedCar\":null},\"Provider:\",{\"name\":\"CarRentals\",\"username\":\"provider1\",\"password\":\"Provider123\"}]}";
 
     @BeforeAll
     public static void setUp() {

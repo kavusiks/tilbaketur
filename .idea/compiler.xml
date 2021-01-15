@@ -8,13 +8,19 @@
         <outputRelativeToContentRoot value="true" />
         <module name="core" />
         <module name="json" />
+        <module name="restapi" />
         <module name="fxui" />
+        <module name="integrationtests" />
+        <module name="restserver" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="core" target="14" />
       <module name="fxui" target="14" />
+      <module name="integrationtests" target="14" />
       <module name="json" target="14" />
+      <module name="restapi" target="14" />
+      <module name="restserver" target="14" />
       <module name="tilbaketur" target="1.5" />
     </bytecodeTargetLevel>
   </component>

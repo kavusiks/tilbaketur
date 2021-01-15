@@ -17,6 +17,10 @@ class CarListDeserializer extends JsonDeserializer<CarList> {
   public CarList deserialize(JsonParser parser, DeserializationContext ctxt)
       throws IOException, JsonProcessingException {
     TreeNode treeNode = parser.getCodec().readTree(parser);
+    return deserialize((JsonNode) treeNode);
+  }
+
+  public CarList deserialize(JsonNode treeNode) {
     if (treeNode instanceof ObjectNode) {
       ObjectNode objectNode = (ObjectNode) treeNode;
       CarList carList = new CarList();
@@ -34,3 +38,5 @@ class CarListDeserializer extends JsonDeserializer<CarList> {
     return null;
   }
 }
+
+

@@ -8,6 +8,7 @@ import java.io.Reader;
 import tilbaketur.core.CarList;
 import tilbaketur.core.Driver;
 import tilbaketur.core.UserList;
+import tilbaketur.core.WorkSpace;
 
 public class TilbaketurPersistence {
   private ObjectMapper mapper;
@@ -16,7 +17,7 @@ public class TilbaketurPersistence {
     mapper = new ObjectMapper();
     mapper.registerModule(new TilbaketurModule());
   }
-
+  /*
   public UserList readUserList(Reader reader) throws IOException {
     return mapper.readValue(reader, UserList.class);
   }
@@ -28,11 +29,15 @@ public class TilbaketurPersistence {
   public Driver readDriver(Reader reader) throws IOException {
     return mapper.readValue(reader, Driver.class);
   }
+  */
+  public WorkSpace readWorkSpace(Reader reader) throws IOException {
+    return mapper.readValue(reader, WorkSpace.class);
+  }
 
   public void configureBeforeWrite() {
     mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
   }
-
+  /*
   public void writeUserList(String userListFileLocation, UserList userList) throws IOException {
     mapper.writeValue(new File(userListFileLocation), userList);
   }
@@ -43,5 +48,9 @@ public class TilbaketurPersistence {
 
   public void writeDriver(String loggedInAsFileLocation, Driver driver) throws IOException {
     mapper.writeValue(new File(loggedInAsFileLocation), driver);
+  }
+  */
+  public void writeWorkSpace(String workSpaceFileLocation, WorkSpace workSpace) throws IOException {
+    mapper.writeValue(new File(workSpaceFileLocation), workSpace);
   }
 }
